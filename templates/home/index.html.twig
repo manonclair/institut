@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Code</th>
+            <th>Libelle</th>
+            <th>Stage</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for matiere in matieres %}
+        <tr>
+            <td>{{ matiere.code }}</td>
+            <td>{{ matiere.libelle }}</td>
+            <td>
+                {% for idx, st in matiere.stages %}
+                    {{ st.libelle }}
+                    {%  if matiere.stages | length > idx + 1 %} -
+                    {% endif %}
+
+                {% endfor %}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -2,79 +2,74 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+#[ORM\Entity]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(length: 30)]
-    private ?string $prenom = null;
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $email = null;
 
-    #[ORM\Column(length: 30)]
-    private ?string $nom = null;
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
 
-    #[ORM\Column(length: 50)]
-    private ?string $mail = null;
-
-    #[ORM\Column(length: 20)]
-    private ?string $role = null;
+    #[ORM\Column]
+    private ?string $password = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPrenom(): ?string
+    public function getEmail(): ?string
     {
-        return $this->prenom;
+        return $this->email;
     }
 
-    public function setPrenom(string $prenom): static
+    public function setEmail(string $email): self
     {
-        $this->prenom = $prenom;
-
+        $this->email = $email;
         return $this;
     }
 
-    public function getNom(): ?string
+    public function getUserIdentifier(): string
     {
-        return $this->nom;
+        return $this->email;
     }
 
-    public function setNom(string $nom): static
+    public function getRoles(): array
     {
-        $this->nom = $nom;
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
+    }
 
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getPassword(): ?string
     {
-        return $this->mail;
+        return $this->password;
     }
 
-    public function setMail(string $mail): static
+    public function setPassword(string $password): self
     {
-        $this->mail = $mail;
-
+        $this->password = $password;
         return $this;
     }
 
-    public function getRole(): ?string
+    public function eraseCredentials(): void
     {
-        return $this->role;
-    }
-
-    public function setRole(string $role): static
-    {
-        $this->role = $role;
-
-        return $this;
+        // Efface les données sensibles si nécessaire
     }
 }

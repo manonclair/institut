@@ -26,6 +26,18 @@
             "migrations/.gitignore"
         ]
     },
+    "php-cs-fixer/shim": {
+        "version": "3.68",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "16422bf8eac6c3be42afe07d37e2abc89d2bdf6b"
+        },
+        "files": [
+            ".php-cs-fixer.dist.php"
+        ]
+    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {
@@ -123,6 +135,18 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/lock": {
+        "version": "7.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.2",
+            "ref": "8e937ff2b4735d110af1770f242c1107fdab4c8e"
+        },
+        "files": [
+            "config/packages/lock.yaml"
+        ]
+    },
     "symfony/mailer": {
         "version": "7.2",
         "recipe": {
@@ -136,7 +160,7 @@
         ]
     },
     "symfony/maker-bundle": {
-        "version": "1.61",
+        "version": "1.62",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",

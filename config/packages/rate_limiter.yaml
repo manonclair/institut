@@ -1,0 +1,6 @@
+framework:
+    rate_limiter:
+        login:
+            policy: 'fixed_window' # Stratégie de limitation
+            limit: 5 # Nombre maximum de tentatives autorisées
+            interval: '1 minute' # Fenêtre de temps
